@@ -1,0 +1,385 @@
+.namer {
+  padding: 20px;
+  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.namer-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.namer-header h1 {
+  margin: 0 0 6px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.subtitle {
+  margin: 0;
+  opacity: 0.5;
+  font-size: 12px;
+}
+
+.namer-content {
+  flex: 1;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 输入区域 */
+.input-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.input-with-select {
+  flex: 1;
+  position: relative;
+  display: flex;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s;
+}
+
+.input-with-select:focus-within {
+  border-color: rgb(88, 164, 246);
+  box-shadow: 0 0 0 3px rgba(88, 164, 246, 0.1);
+}
+
+/* 命名风格选择器 */
+.style-selector {
+  position: relative;
+}
+
+.style-selector-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border: none;
+  background: #f8fafc;
+  border-radius: 10px 0 0 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 13px;
+  font-weight: 500;
+  color: #4b5563;
+  border-right: 1px solid #e5e7eb;
+}
+
+.style-selector-btn:hover {
+  background: #f1f5f9;
+  color: #374151;
+}
+
+.style-label {
+  white-space: nowrap;
+}
+
+.dropdown-icon {
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.style-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 100;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+  overflow: hidden;
+}
+
+.style-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.style-option:hover {
+  background: #f8fafc;
+}
+
+.style-option.active {
+  background: #eff6ff;
+}
+
+.style-option-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.style-option-example {
+  font-size: 11px;
+  color: #9ca3af;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.style-option.active .style-option-label {
+  color: rgb(88, 164, 246);
+}
+
+/* 输入框 */
+.namer-input {
+  flex: 1;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 0 10px 10px 0;
+  font-size: 14px;
+  background: transparent;
+  resize: none;
+  font-family: inherit;
+  line-height: 1.5;
+  outline: none;
+}
+
+.namer-input::placeholder {
+  color: #9ca3af;
+}
+
+/* 转换按钮 */
+.translate-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  background: rgb(88, 164, 246);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(88, 164, 246, 0.3);
+  white-space: nowrap;
+}
+
+.translate-btn:hover:not(:disabled) {
+  background: rgb(70, 150, 230);
+  box-shadow: 0 2px 6px rgba(88, 164, 246, 0.4);
+}
+
+.translate-btn:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(88, 164, 246, 0.3);
+}
+
+.translate-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 结果区域 */
+.result-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.result-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.copy-btn {
+  padding: 6px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 12px;
+  background: #fff;
+  color: #4b5563;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.copy-btn:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.result-content {
+  padding: 14px;
+  background: #f8fafc;
+  border-radius: 8px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  word-break: break-all;
+  color: #1f2937;
+}
+
+/* 提示文本 */
+.hint-text {
+  margin-top: 24px;
+  text-align: center;
+  opacity: 0.4;
+  font-size: 12px;
+}
+
+.hint-text p {
+  margin: 3px 0;
+}
+
+/* 错误提示 */
+.error-message {
+  padding: 12px 16px;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #dc2626;
+}
+
+/* 底部设置按钮 */
+.namer-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  padding-top: 12px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.settings-btn {
+  padding: 10px;
+  background: #fff;
+  color: #9ca3af;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-btn:hover {
+  color: #6b7280;
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+/* 暗色模式 */
+@media (prefers-color-scheme: dark) {
+  .namer-header h1 {
+    color: #f9fafb;
+  }
+
+  .subtitle {
+    color: #9ca3af;
+  }
+
+  .input-with-select {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  .input-with-select:focus-within {
+    border-color: rgb(88, 164, 246);
+  }
+
+  .style-selector-btn {
+    background: #374151;
+    color: #d1d5db;
+    border-right-color: #374151;
+  }
+
+  .style-selector-btn:hover {
+    background: #4b5563;
+    color: #f9fafb;
+  }
+
+  .namer-input {
+    color: #f9fafb;
+  }
+
+  .namer-input::placeholder {
+    color: #6b7280;
+  }
+
+  .style-dropdown {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  .style-option:hover {
+    background: #374151;
+  }
+
+  .style-option.active {
+    background: rgba(88, 164, 246, 0.15);
+  }
+
+  .style-option-label {
+    color: #d1d5db;
+  }
+
+  .style-option.active .style-option-label {
+    color: rgb(88, 164, 246);
+  }
+
+  .translate-btn {
+    background: rgb(88, 164, 246);
+  }
+
+  .copy-btn,
+  .settings-btn {
+    background: #374151;
+    border-color: #4b5563;
+    color: #d1d5db;
+  }
+
+  .copy-btn:hover,
+  .settings-btn:hover {
+    background: #4b5563;
+    border-color: #6b7280;
+  }
+
+  .result-section {
+    background: #1f2937;
+  }
+
+  .result-label {
+    color: #9ca3af;
+  }
+
+  .result-content {
+    background: #111827;
+    color: #e5e7eb;
+  }
+
+  .error-message {
+    background-color: rgba(220, 38, 38, 0.15);
+    border-color: rgba(220, 38, 38, 0.3);
+    color: #fca5a5;
+  }
+
+  .namer-footer {
+    border-top-color: #374151;
+  }
+
+  .hint-text {
+    color: #6b7280;
+  }
+}

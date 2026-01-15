@@ -1,0 +1,29 @@
+{
+  "main": "index.html",
+  "preload": "preload/services.js",
+  "logo": "logo.png",
+  "development": {
+    "main": "http://localhost:5173"
+  },
+  "features": [
+    {
+      "code": "namer",
+      "explain": "百炼平台接口命名转换",
+      "cmds": [
+        "翻译",
+        "起名",
+        "namer",
+        "命名"
+      ]
+    },
+    {
+      "code": "config",
+      "explain": "配置 API Key 和模型",
+      "cmds": [
+        "配置",
+        "设置",
+        "config"
+      ]
+    }
+  ]
+}
