@@ -1,385 +1,285 @@
+/* 核心变量定义 - 方便统一修改品牌色 */
+:root {
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-light: rgba(59, 130, 246, 0.1);
+  --bg-gradient: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  --surface: #ffffff;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --border-color: #e5e7eb;
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
 .namer {
-  padding: 20px;
+  padding: 40px 20px;
   box-sizing: border-box;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #f8fafc; /* 浅灰蓝色背景提升质感 */
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .namer-header {
-  margin-bottom: 20px;
+  margin-bottom: 32px;
   text-align: center;
 }
 
 .namer-header h1 {
-  margin: 0 0 6px 0;
-  font-size: 20px;
-  font-weight: 600;
+  margin: 0 0 8px 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  background: var(--bg-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
   margin: 0;
-  opacity: 0.5;
-  font-size: 12px;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .namer-content {
   flex: 1;
-  max-width: 600px;
+  max-width: 640px;
   width: 100%;
   margin: 0 auto;
 }
 
-/* 输入区域 */
+/* --- 输入区域优化 --- */
 .input-section {
   display: flex;
-  gap: 10px;
-  margin-bottom: 16px;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .input-with-select {
   flex: 1;
   position: relative;
   display: flex;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .input-with-select:focus-within {
-  border-color: rgb(88, 164, 246);
-  box-shadow: 0 0 0 3px rgba(88, 164, 246, 0.1);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-light), var(--shadow-md);
+  transform: translateY(-1px);
 }
 
-/* 命名风格选择器 */
-.style-selector {
-  position: relative;
-}
-
+/* --- 下拉按钮样式 (品牌色精致风格) --- */
 .style-selector-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 14px;
+  gap: 8px;
+  height: 100%;
+  padding: 0 16px;
   border: none;
-  background: #f8fafc;
-  border-radius: 10px 0 0 10px;
+  background: var(--bg-gradient);
+  border-radius: 11px 0 0 11px; /* 略小于父容器以防溢出边框 */
   cursor: pointer;
   transition: all 0.2s;
   font-size: 13px;
-  font-weight: 500;
-  color: #4b5563;
-  border-right: 1px solid #e5e7eb;
+  font-weight: 600;
+  color: white;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .style-selector-btn:hover {
-  background: #f1f5f9;
-  color: #374151;
+  filter: brightness(1.05);
+  padding-right: 20px; /* 轻微的伸缩交互 */
 }
 
-.style-label {
-  white-space: nowrap;
-}
-
-.dropdown-icon {
-  flex-shrink: 0;
-  transition: transform 0.2s;
+.style-selector-btn:active {
+  filter: brightness(0.95);
 }
 
 .style-dropdown {
   position: absolute;
-  top: calc(100% + 4px);
+  top: calc(100% + 8px);
   left: 0;
   z-index: 100;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  min-width: 160px;
-  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  min-width: 180px;
+  padding: 6px;
+  transform-origin: top left;
+  animation: dropdownIn 0.2s ease-out;
+}
+
+@keyframes dropdownIn {
+  from { opacity: 0; transform: scale(0.95) translateY(-10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .style-option {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 14px;
-  cursor: pointer;
-  transition: background 0.15s;
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-bottom: 2px;
 }
 
 .style-option:hover {
-  background: #f8fafc;
+  background: #f1f5f9;
 }
 
 .style-option.active {
-  background: #eff6ff;
+  background: var(--primary-light);
 }
 
-.style-option-label {
-  font-size: 13px;
-  font-weight: 500;
-  color: #374151;
-}
-
-.style-option-example {
-  font-size: 11px;
-  color: #9ca3af;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-}
-
-.style-option.active .style-option-label {
-  color: rgb(88, 164, 246);
-}
-
-/* 输入框 */
+/* --- 输入框 --- */
 .namer-input {
   flex: 1;
-  padding: 12px 14px;
+  padding: 14px 16px;
   border: none;
-  border-radius: 0 10px 10px 0;
-  font-size: 14px;
+  font-size: 15px;
   background: transparent;
-  resize: none;
-  font-family: inherit;
-  line-height: 1.5;
+  color: var(--text-main);
   outline: none;
 }
 
-.namer-input::placeholder {
-  color: #9ca3af;
-}
-
-/* 转换按钮 */
+/* --- 转换按钮 --- */
 .translate-btn {
-  padding: 12px 24px;
+  padding: 0 28px;
   border: none;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 500;
-  background: rgb(88, 164, 246);
+  border-radius: var(--radius-lg);
+  font-size: 15px;
+  font-weight: 600;
+  background: var(--bg-gradient);
   color: #fff;
   cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 1px 3px rgba(88, 164, 246, 0.3);
-  white-space: nowrap;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .translate-btn:hover:not(:disabled) {
-  background: rgb(70, 150, 230);
-  box-shadow: 0 2px 6px rgba(88, 164, 246, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
 }
 
 .translate-btn:active:not(:disabled) {
-  transform: translateY(1px);
-  box-shadow: 0 1px 2px rgba(88, 164, 246, 0.3);
+  transform: translateY(0);
 }
 
-.translate-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* 结果区域 */
+/* --- 结果区域 --- */
 .result-section {
-  background: #fff;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
 }
 
 .result-header {
+  margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.result-label {
-  font-size: 12px;
-  font-weight: 500;
-  color: #6b7280;
-}
-
-.copy-btn {
-  padding: 6px 12px;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  font-size: 12px;
-  background: #fff;
-  color: #4b5563;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.copy-btn:hover {
-  background: #f9fafb;
-  border-color: #d1d5db;
 }
 
 .result-content {
-  padding: 14px;
+  padding: 18px;
   background: #f8fafc;
-  border-radius: 8px;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-  font-size: 14px;
-  line-height: 1.6;
-  word-break: break-all;
-  color: #1f2937;
+  border: 1px dashed #cbd5e1; /* 虚线增加“待复制”的仪式感 */
+  border-radius: 10px;
+  font-size: 16px;
+  color: var(--primary);
+  font-weight: 600;
 }
 
-/* 提示文本 */
-.hint-text {
-  margin-top: 24px;
-  text-align: center;
-  opacity: 0.4;
-  font-size: 12px;
+.result-label {
+  font-size: 18px;
+  padding: 4px 8px;
+  font-weight: 600;
 }
 
-.hint-text p {
-  margin: 3px 0;
+.copy-btn {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  padding: 4px 8px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-radius: calc(var(--radius-lg) - 2px);
 }
 
-/* 错误提示 */
-.error-message {
-  padding: 12px 16px;
-  background-color: #fef2f2;
-  border: 1px solid #fecaca;
-  border-radius: 8px;
-  font-size: 13px;
-  color: #dc2626;
+.copy-btn:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+  background: var(--primary-light);
 }
 
-/* 底部设置按钮 */
+/* 底部容器微调 */
 .namer-footer {
-  margin-top: 20px;
+  margin-top: 32px;
   display: flex;
   justify-content: center;
-  padding-top: 12px;
-  border-top: 1px solid #f3f4f6;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+  opacity: 0.8;
 }
 
+/* 设置按钮优化 */
 .settings-btn {
-  padding: 10px;
-  background: #fff;
-  color: #9ca3af;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  border-radius: 50%; /* 圆形按钮更具工具属性 */
   cursor: pointer;
-  transition: all 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 增加弹性动效 */
+  box-shadow: var(--shadow-sm);
 }
 
+.settings-btn svg {
+  transition: transform 0.4s ease;
+}
+
+/* 交互感增强 */
 .settings-btn:hover {
-  color: #6b7280;
-  background: #f9fafb;
-  border-color: #d1d5db;
+  color: var(--primary);
+  border-color: var(--primary);
+  background: var(--primary-light);
+  transform: translateY(-2px) rotate(30deg); /* 悬停时轻微旋转并上浮 */
+  box-shadow: 0 4px 12px var(--primary-light);
 }
 
-/* 暗色模式 */
+/* 点击时的旋转效果 */
+.settings-btn:active {
+  transform: translateY(0) scale(0.9) rotate(90deg); /* 点击时产生深度按压感并大幅旋转 */
+  transition: all 0.1s;
+}
+
+.settings-btn:hover svg {
+  transform: rotate(45deg); /* 内部齿轮旋转 */
+}
+
+/* 暗色模式适配 */
 @media (prefers-color-scheme: dark) {
-  .namer-header h1 {
-    color: #f9fafb;
-  }
-
-  .subtitle {
-    color: #9ca3af;
-  }
-
-  .input-with-select {
-    background: #1f2937;
-    border-color: #374151;
-  }
-
-  .input-with-select:focus-within {
-    border-color: rgb(88, 164, 246);
-  }
-
-  .style-selector-btn {
-    background: #374151;
-    color: #d1d5db;
-    border-right-color: #374151;
-  }
-
-  .style-selector-btn:hover {
-    background: #4b5563;
-    color: #f9fafb;
-  }
-
-  .namer-input {
-    color: #f9fafb;
-  }
-
-  .namer-input::placeholder {
-    color: #6b7280;
-  }
-
-  .style-dropdown {
-    background: #1f2937;
-    border-color: #374151;
-  }
-
-  .style-option:hover {
-    background: #374151;
-  }
-
-  .style-option.active {
-    background: rgba(88, 164, 246, 0.15);
-  }
-
-  .style-option-label {
-    color: #d1d5db;
-  }
-
-  .style-option.active .style-option-label {
-    color: rgb(88, 164, 246);
-  }
-
-  .translate-btn {
-    background: rgb(88, 164, 246);
-  }
-
-  .copy-btn,
   .settings-btn {
-    background: #374151;
-    border-color: #4b5563;
-    color: #d1d5db;
+    background: #1e293b;
+    border-color: #334155;
+    color: #64748b;
   }
 
-  .copy-btn:hover,
   .settings-btn:hover {
-    background: #4b5563;
-    border-color: #6b7280;
-  }
-
-  .result-section {
-    background: #1f2937;
-  }
-
-  .result-label {
-    color: #9ca3af;
-  }
-
-  .result-content {
-    background: #111827;
-    color: #e5e7eb;
-  }
-
-  .error-message {
-    background-color: rgba(220, 38, 38, 0.15);
-    border-color: rgba(220, 38, 38, 0.3);
-    color: #fca5a5;
-  }
-
-  .namer-footer {
-    border-top-color: #374151;
-  }
-
-  .hint-text {
-    color: #6b7280;
+    background: var(--primary-light);
+    color: #60a5fa;
+    border-color: #60a5fa;
   }
 }

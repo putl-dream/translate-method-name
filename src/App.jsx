@@ -36,7 +36,7 @@ export default function App () {
   }
 
   if (route === 'config') {
-    return <Config />
+    return <Config onNavigate={setRoute} />
   }
 
   return false

@@ -11,7 +11,7 @@ const MODELS = [
   { value: 'qwen-plus-2025-07-28', label: 'qwen-plus-2025-07-28 (最新)' }
 ]
 
-export default function Config () {
+export default function Config ({ onNavigate }) {
   const [apiKey, setApiKey] = useState('')
   const [model, setModel] = useState('qwen-plus')
   const [saved, setSaved] = useState(false)
@@ -33,14 +33,28 @@ export default function Config () {
     window.utools.dbStorage.setItem(STORAGE_KEY_MODEL, model)
     setSaved(true)
     window.utools.showNotification('配置已保存')
-    setTimeout(() => setSaved(false), 2000)
+    setTimeout(() => {
+      setSaved(false)
+      onNavigate('namer')
+    }, 500)
+  }
+
+  const handleBack = () => {
+    onNavigate('namer')
   }
 
   return (
     <div className='config'>
       <div className='config-header'>
-        <h1>配置</h1>
-        <p className='subtitle'>配置百炼平台 API 信息</p>
+        <button onClick={handleBack} className='back-btn' title='返回'>
+          <svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2'>
+            <path d='M19 12H5M12 19l-7-7 7-7' />
+          </svg>
+        </button>
+        <div className='config-header-content'>
+          <h1>配置</h1>
+          <p className='subtitle'>配置百炼平台 API 信息</p>
+        </div>
       </div>
 
       <div className='config-content'>
@@ -70,6 +84,9 @@ export default function Config () {
         </div>
 
         <div className='config-actions'>
+          <button onClick={handleBack} className='cancel-btn'>
+            取消
+          </button>
           <button onClick={handleSave} className='save-btn'>
             {saved ? '✓ 已保存' : '保存配置'}
           </button>
